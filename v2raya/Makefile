@@ -10,7 +10,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/v2rayA/v2rayA/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=4d6cd27ffd41e007483a49f4fee8be904ea6bdae2b4dfb055e5979ea35b6f7cd
+PKG_HASH:=1935665d17e2bf2de7d3ca8a628e8c59d9ba934478a01080d68cdfe698481d3f
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/service
 
 PKG_LICENSE:=AGPL-3.0-only
@@ -60,7 +60,7 @@ define Download/v2raya-web
 	URL:=https://github.com/v2rayA/v2rayA/releases/download/v$(PKG_VERSION)/
 	URL_FILE:=web.tar.gz
 	FILE:=$(WEB_FILE)
-          HASH:=7bb401e171b5e288a4120140521ed038986482e4852bf3b56368c3f0370a50b6
+    HASH:=7bb401e171b5e288a4120140521ed038986482e4852bf3b56368c3f0370a50b6
 endef
 
 define Build/Prepare
