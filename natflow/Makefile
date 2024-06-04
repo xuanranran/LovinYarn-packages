@@ -12,7 +12,7 @@ PKG_NAME:=natflow
 PKG_VERSION:=20240606
 
 PKG_SOURCE_URL:=https://codeload.github.com/ptpt52/natflow/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=075582948408e9d531f257a350f972515b2e87f07c0f7388886800735087d994
+PKG_HASH:=807595ff5b1d27e7a7b40340dfe932ec853b672d497471686ad096377c1fd9f8
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 PKG_MAINTAINER:=Chen Minqiang <ptpt52@gmail.com>
@@ -97,6 +97,8 @@ define Package/natflow-auth/install
 	$(INSTALL_DATA) ./files/natflow.config $(1)/etc/config/natflow
 	$(INSTALL_DIR) $(1)/etc/hotplug.d/iface
 	$(INSTALL_DATA) ./files/20-natflow-zone.hotplug $(1)/etc/hotplug.d/iface/20-natflow-zone
+	$(INSTALL_DIR) $(1)/sbin
+	$(INSTALL_BIN) ./files/urllogger.sh $(1)/sbin/urllogger
 endef
 
 $(eval $(call KernelPackage,natflow))
