@@ -40,8 +40,12 @@ def start_server():
     config6 = Config(app=app, host="::1", port=PORT, access_log=False)
     server4 = Server(config4)
     server6 = Server(config6)
-    threading.Thread(target=server4.run).start()
-    threading.Thread(target=server6.run).start()
+    t4 = threading.Thread(target=server4.run)
+    t4.daemon = True
+    t6 = threading.Thread(target=server6.run)
+    t6.daemon = True
+    t4.start()
+    t6.start()
 
 def start_ua2f(u: str):
     p = subprocess.Popen([u])
@@ -79,7 +83,7 @@ if __name__ == "__main__":
 
     time.sleep(3)
 
-    for i in tqdm(range(2000)):
+    for i in tqdm(range(1024)):
         nxt = ua.random
         response = requests.get(f"http://127.0.0.1:{PORT}", headers={
             "User-Agent": nxt
@@ -87,7 +91,7 @@ if __name__ == "__main__":
         assert response.ok
         assert response.text == str(len(nxt))
 
-    for i in tqdm(range(2000)):
+    for i in tqdm(range(4096)):
         nxt = ua.random
         response = requests.get(f"http://[::1]:{PORT}", headers={
             "User-Agent": nxt
