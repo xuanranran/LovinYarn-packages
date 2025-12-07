@@ -42,30 +42,6 @@ for _, item in ipairs(values) do
 end
 %>
 
-<style>
-/* 组标题的右箭头（折叠） */
-.lv-arrow-right {
-	width: 0;
-	height: 0;
-	border-top: 4px solid transparent;
-	border-bottom: 4px solid transparent;
-	border-left: 5px solid #555;
-	display: inline-block;
-	vertical-align: middle;
-}
-
-/* 组标题的下箭头（展开） */
-.lv-arrow-down-small {
-	width: 0;
-	height: 0;
-	border-left: 4px solid transparent;
-	border-right: 4px solid transparent;
-	border-top: 5px solid #555;
-	display: inline-block;
-	vertical-align: middle;
-}
-</style>
-
 <div id="<%=cbid%>" style="display: inline-block;">
 	<!-- 搜索 -->
 	<input type="text"
@@ -84,7 +60,7 @@ end
 				<div class="group-title"
 					onclick="toggleGroup_<%=self.option%>('<%=gname%>')"
 					style="cursor:pointer;padding:6px;background:#f0f0f0;border-radius:4px;margin-bottom:4px;display:flex;align-items:center;white-space:nowrap;">
-					<span id="arrow-<%=self.option%>-<%=gname%>" class="lv-arrow-down-small" style="margin-right: 8px;"></span>
+					<span id="arrow-<%=self.option%>-<%=gname%>" style="width:16px;">▼</span>
 					<b><%=gname%></b>
 					<span id="group-count-<%=self.option%>-<%=gname%>" style="margin-left:8px;color:blue;">
 						(0/<%=#items%>)
@@ -140,10 +116,10 @@ end
 		if (isSearching) {
 			if (ul.style.display === "none") {
 				ul.style.display = "";
-				if (arrow) arrow.className = "lv-arrow-down-small";
+				if (arrow) arrow.textContent = "▼";
 			} else {
 				ul.style.display = "none";
-				if (arrow) arrow.className = "lv-arrow-right";
+				if (arrow) arrow.textContent = "►";
 			}
 			return;
 		}
@@ -155,17 +131,17 @@ end
 			const garrow = document.getElementById("arrow-" + opt + "-" + gname);
 			if (gname !== g) {
 				if (gul) gul.style.display = "none";
-				if (garrow) arrow.className = "lv-arrow-right";
+				if (garrow) garrow.textContent = "►";
 			}
 		});
 		document.getElementById(listId).parentNode.scrollTop = 0;
 		// 切换当前组
 		if (ul.style.display === "none") {
 			ul.style.display = "";
-			if (arrow) arrow.className = "lv-arrow-down-small";
+			if (arrow) arrow.textContent = "▼";
 		} else {
 			ul.style.display = "none";
-			if (arrow) arrow.className = "lv-arrow-right";
+			if (arrow) arrow.textContent = "►";
 		}
 	};
 
@@ -199,7 +175,7 @@ end
 				group.style.display = "";
 				if (keyword) {
 					ul.style.display = "";
-					arrow.className = "lv-arrow-down-small";
+					arrow.textContent = "▼";
 				}
 			}
 		});
@@ -214,7 +190,7 @@ end
 				const ul = document.getElementById("group-" + opt + "-" + gname);
 				const arrow = document.getElementById("arrow-" + opt + "-" + gname);
 				if (ul) ul.style.display = "none";
-				if (arrow) arrow.className = "lv-arrow-right";
+				if (arrow) arrow.textContent = "►";
 			});
 		}
 	};
@@ -267,7 +243,7 @@ end
 			const ul = document.getElementById("group-" + opt + "-" + gname);
 			const arrow = document.getElementById("arrow-" + opt + "-" + gname);
 			if (ul) ul.style.display = "none";
-			if (arrow) arrow.className = "lv-arrow-right";
+			if (arrow) arrow.textContent = "►";
 		});
 
 		updateCount();
